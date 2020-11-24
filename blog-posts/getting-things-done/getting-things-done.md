@@ -10,7 +10,7 @@ canonical_url:
 
 It's very easy for me to set myself tasks. Build that website. Write a blog post. Clean the house. Learn about that library or a new technology. Get a degree. Get the outside of the house ready for winter. Find a job. So easy. There, done. 
 
-Or...not. 
+Or...not? 
 
 One of the problems with this way of (not) planning is that it sets tasks or identifies problems, without a map to to a solution.
 
