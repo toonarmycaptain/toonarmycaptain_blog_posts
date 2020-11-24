@@ -1,6 +1,6 @@
 ---
 published: false
-title: "Getting things done. Or "how to solve problems""
+title: "Getting things done. Or, "how to solve problems"."
 cover_image: ""
 description: "how to solve problems"
 tags: productivity, organization
