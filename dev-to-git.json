@@ -2,5 +2,9 @@
   {
     "id": 523572,
     "relativePathToArticle": "./blog-posts/getting-things-done/getting-things-done.md"
+  },
+  {
+    "id": 526288,
+    "relativePathToArticle": "./blog-posts/deploy-pythonanywhere/deploy-pythonanywhere.md"
   }
 ]
