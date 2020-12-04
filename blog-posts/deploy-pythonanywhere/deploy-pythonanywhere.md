@@ -2,8 +2,8 @@
 published: false
 title: "Deploying flask app to pythonanywhere"
 cover_image:
-description: "deploy site to pythonanywhere"
-tags: pythonanywhere, deploy, flask
+description: "How to deploy a basic flask application to pythonanywhere.com."
+tags: [pythonanywhere, deploy, flask]
 series:
 canonical_url:
 ---
