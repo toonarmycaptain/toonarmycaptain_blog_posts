@@ -1,9 +1,9 @@
 ---
 published: true
-title: "Getting things done. Or, "how to solve problems"."
+title: "Getting things done. Or, \"how to solve problems\"."
 cover_image:
-description: "how to solve problems"
-tags: productivity, organization
+description: "how to solve problems and be productive"
+tags: [productivity, organization]
 series:
 canonical_url:
 ---
@@ -34,5 +34,5 @@ Recently for me this involved making and posting [my first blog entry](https://d
  - deploy at [pythonanywhere.com/toonarmycaptain](https://toonarmycaptain.pythonanywhere.com/home/)
 
 
-This skill is really important to a lot of things, from isolating bugs by breaking down the possible causes, to writing simple and maintainable code by following the adage to keep functions/classes to one purpose. Of course, it's also helpful when attacking large projects :)
+This skill is really important to a lot of things, from isolating bugs by breaking down the possible causes, to writing simple and maintainable code by following the adage to keep functions/classes to one purpose. Of course, it's also helpful when attacking large projects. :)
 
