@@ -136,10 +136,10 @@ defer-to-connect@^1.0.1:
   resolved "https://registry.yarnpkg.com/defer-to-connect/-/defer-to-connect-1.0.2.tgz#4bae758a314b034ae33902b5aac25a8dd6a8633e"
   integrity sha512-k09hcQcTDY+cwgiwa6PYKLm3jlagNzQ+RSvhjzESOGOx+MNOuXkxTfEvPrO1IOQ81tArCFYQgi631clB70RpQw==
 
-dev-to-git@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/dev-to-git/-/dev-to-git-1.4.1.tgz#ed6fb79216e4c1f4475afc9c1a4d02be035e1fba"
-  integrity sha512-/SeCsWh+7gJuQXZsOVYIo4B2Tu3rz05+h8uWh99IoV07VdKC4iZWvNkL3xijvqSkfafEcT97i1uRadM8fM0LVQ==
+dev-to-git@1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/dev-to-git/-/dev-to-git-1.4.5.tgz#0134babf5f97b39ad78d3e424aab6a1010474918"
+  integrity sha512-8ds3ur4wOQA5sjVucOdIkwU1C3aYyea31XqzzgqughCC01v7MEEG4e4+l+vaU0m2GdAMAMaBZEEBN8R7QhDNZg==
   dependencies:
     chalk "^2.4.2"
     commander "^2.20.0"
