@@ -1,0 +1,19 @@
+# Lints the posts on commit. Set up once per clone:
+#   uv sync && uv run pre-commit install --allow-missing-config
+# PyMarkdown's version is pinned in pyproject.toml, with its rule settings.
+repos:
+  - repo: local
+    hooks:
+      - id: pymarkdown
+        name: PyMarkdown
+        language: system
+        entry: uv run --frozen pymarkdown scan
+        types: [markdown]
+        files: ^docs/
+
+      - id: link-missing-scheme
+        name: Links to other sites start with https://
+        description: A link like [github](github.com) is treated as a relative link, so it breaks.
+        language: pygrep
+        entry: '\]\((?!https?://|mailto:|#|/|\.{1,2}/)[\w-]+(\.[\w-]+)*\.(com|org|net|io|dev|co|uk|me|edu|gov|app|ai)\b'
+        files: ^docs/.*\.md$

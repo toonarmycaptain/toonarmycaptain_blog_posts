@@ -1,0 +1,81 @@
+/* Fits the main site's header and footer (shared/header_footer.css) into Zensical's layout. */
+
+/* The main site's body padding and font size, which header_footer.css relies on. The main site
+   leaves font size at the browser's default; medium is that default, ignoring Zensical's scaling. */
+.site_header,
+.footer {
+    font-size: medium;
+    padding-left: 1%;
+    padding-right: 1%;
+    box-sizing: border-box;
+}
+
+/* Sticky here rather than on .top_navbar: Zensical reads the header's position and height. */
+.site_header {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    padding-top: 1vw;
+}
+
+/* Zensical's JS adds md-header--shadow to the header; the main site's nav has no shadow. */
+.site_header.md-header--shadow {
+    box-shadow: none;
+}
+
+.site_header .top_navbar {
+    position: static;
+}
+
+.footer {
+    padding-bottom: 1vw;
+}
+
+/* Search box and menu button, on the left of the right-floated nav. */
+.blog_controls {
+    float: left;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 2em;
+}
+
+.blog_controls .md-search {
+    padding: 0;
+}
+
+.blog_controls .md-search__button {
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.blog_controls .md-search__button:hover {
+    color: white;
+    background-color: black;
+}
+
+.blog_control {
+    display: none;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.blog_control svg {
+    fill: black;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+/* Zensical shows the sidebar as a drawer, and hides the search box, below these widths. */
+@media screen and (max-width: 76.234375em) {
+    .blog_control--drawer {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 59.984375em) {
+    .blog_control--search {
+        display: block;
+    }
+}
