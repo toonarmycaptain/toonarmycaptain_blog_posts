@@ -10,6 +10,12 @@
     box-sizing: border-box;
 }
 
+/* header_footer.css colours the navbar and the footer's icon row with --page_background, or the
+   browser's default background (Canvas) without it. Zensical's dark background isn't Canvas. */
+body {
+    --page_background: var(--md-default-bg-color);
+}
+
 /* Sticky here rather than on .top_navbar: Zensical reads the header's position and height. */
 .site_header {
     position: sticky;
@@ -34,6 +40,12 @@
     font-family: initial;
 }
 
+/* White tiles in dark mode, as on the main site. Its rule is in its style.css, which the blog doesn't
+   load, and follows the device rather than the blog's toggle. */
+[data-md-color-scheme="slate"] .image_invert_in_dark {
+    filter: invert(1);
+}
+
 /* Search box and menu button, on the left of the right-floated nav. */
 .blog_controls {
     float: left;
@@ -47,15 +59,17 @@
     padding: 0;
 }
 
+/* System colours, as the navbar links use, so these follow the light or dark scheme. The border is
+   #ccc in light mode. */
 .blog_controls .md-search__button {
-    color: black;
-    background-color: white;
-    border: 1px solid #ccc;
+    color: CanvasText;
+    background-color: var(--page_background);
+    border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
 }
 
 .blog_controls .md-search__button:hover {
-    color: white;
-    background-color: black;
+    color: var(--page_background);
+    background-color: CanvasText;
 }
 
 .blog_control {
@@ -65,7 +79,7 @@
 }
 
 .blog_control svg {
-    fill: black;
+    fill: CanvasText;
     width: 1.5em;
     height: 1.5em;
 }
