@@ -21,6 +21,8 @@ post_url_format = "{slug}"
 
 [project.plugins.rss]
 match_path = "posts/.*"
+# Posts in the feed; 0 means none, not unlimited, so this is "all of them".
+length = 999
 
 [project.plugins.rss.date_from_meta]
 as_creation = "date"
