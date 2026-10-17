@@ -42,6 +42,9 @@ post_url_format = "{slug}"
 match_path = "posts/.*"
 # Posts in the feed; 0 means none, not unlimited, so this is "all of them".
 length = 999
+# Made by scripts/generate_header_footer.py, and shown as album art by podcast apps. Feed readers
+# need the full URL. On deploy, scripts/add_itunes_image.py also puts it in an <itunes:image>.
+image = "https://blog.toonarmycaptain.com/shared/feed_image.jpg"
 
 [project.plugins.rss.date_from_meta]
 as_creation = "date"

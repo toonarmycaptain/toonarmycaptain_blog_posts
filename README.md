@@ -7,8 +7,8 @@ Spotted a mistake, or have a suggestion? Please
 
 ## Notes
 
-Built with [Zensical](https://zensical.org/). The header and footer aren't kept in this repo:
-`scripts/generate_header_footer.py` grabs them from the `master` branch of
+Built with [Zensical](https://zensical.org/). The header, footer, and RSS feed image aren't kept in
+this repo:`scripts/generate_header_footer.py` grabs them from the `master` branch of
 [toonarmycaptain_website](https://github.com/toonarmycaptain/toonarmycaptain_website), and the blog
 rebuilds automatically when changes are pushed to it.
 
@@ -22,6 +22,9 @@ uv run zensical serve
 
 Rerun `generate_header_footer.py` after the website's header or footer changes. To try website
 changes before pushing them, add `--website ../toonarmycaptain_website` to use a local checkout.
+
+After building, the deploy runs `scripts/add_itunes_image.py`, which copies the RSS feed's image
+into the `<itunes:image>` tag podcast apps look for. The local preview's feed doesn't have it.
 
 Posts live in `docs/posts/<slug>/<slug>.md`, with images beside them. Front matter:
 

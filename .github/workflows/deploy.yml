@@ -41,6 +41,9 @@ jobs:
       - name: Build
         run: uv run zensical build
 
+      - name: Podcast app image in the RSS feeds
+        run: uv run python scripts/add_itunes_image.py
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v4
         with:
