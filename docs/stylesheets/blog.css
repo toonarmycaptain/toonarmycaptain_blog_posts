@@ -27,8 +27,11 @@
     position: static;
 }
 
+/* The main site's footer is in the browser's default font. Its icons are inline, so the font sets
+   the width of the spaces between them. */
 .footer {
     padding-bottom: 1vw;
+    font-family: initial;
 }
 
 /* Search box and menu button, on the left of the right-floated nav. */
