@@ -1,0 +1,10 @@
+{#-
+  Same wording as toonarmycaptain_website's 404 page. Links are root-absolute, since Pages serves
+  this page at whatever path was missing.
+-#}
+{% extends "main.html" %}
+{% block content %}
+  <h1>Error - 404 Not Found</h1>
+  <p>Looks like you managed to lose something, or I did.<br>Maybe try something else?</p>
+  <p><a href="/">Back to the blog</a></p>
+{% endblock %}
