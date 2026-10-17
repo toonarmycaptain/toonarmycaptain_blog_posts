@@ -1,0 +1,26 @@
+[project]
+name = "toonarmycaptain-blog-posts"
+version = "0.1.0"
+requires-python = ">=3.15"
+dependencies = [
+    "mdx-breakless-lists==1.0.1",
+    "zensical==0.0.71",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit==4.7.0",
+    "pymarkdownlnt==0.9.41",
+]
+
+# Markdown linter, run on posts by pre-commit. The rules left on catch Markdown that PyCharm's
+# preview (CommonMark) and the blog (Python-Markdown) render differently.
+[tool.pymarkdown]
+extensions.front-matter.enabled = true
+# Python-Markdown needs nested lists indented 4 spaces; CommonMark accepts 2.
+plugins.md007.indent = 4
+# Off: style only, no effect on rendering.
+plugins.md013.enabled = false  # line length: posts keep a paragraph on one line
+plugins.md026.enabled = false  # trailing punctuation in headings, e.g. "...or wrong about!"
+plugins.md033.enabled = false  # inline HTML: posts use <sup> and <a id> for footnotes
+plugins.md041.enabled = false  # first line a heading: the title is in front matter
