@@ -4,7 +4,7 @@ branch.
 
 Fetches the website's master into .cache/, has its Flask app render base.html, cuts out the nav and
 footer, rewrites their links for the blog, and writes them as Zensical partial overrides. The
-static files they use, and header_footer.css, are copied into the blog's docs. The feed image,
+static files they use, header_footer.css and favicon.ico are copied into the blog's docs. The feed image,
 which podcast apps show as album art, is the website's avatar with the blog's name across it.
 
     uv run python scripts/generate_header_footer.py
@@ -35,7 +35,10 @@ PARTIALS_DIR = BLOG_ROOT / 'overrides' / 'partials'
 SHARED_DIR = BLOG_ROOT / 'docs' / 'shared'
 SHARED_URL = '/shared/'
 # Linked from the website's <head>, so not found by scanning the nav and footer.
-EXTRA_STATIC_FILES = ('header_footer.css', 'favicon.ico')
+EXTRA_STATIC_FILES = ('header_footer.css',)
+# Copied to the blog's root rather than shared/: browsers ask for /favicon.ico on pages that don't
+# link it, eg RSS feed.
+FAVICON = 'favicon.ico'
 # The feed image is made from FEED_IMAGE_SOURCE, and set as the feed's image in zensical.toml.
 FEED_IMAGE_SOURCE = 'avatar_full.jpg'
 FEED_IMAGE = 'feed_image.jpg'
@@ -174,7 +177,7 @@ def render(website_dir: Path) -> None:
     nav = mark_blog_active(rewrite_links(cut(html, 'nav', 'top_navbar'), static_files), blog_url)
     footer = rewrite_links(cut(html, 'footer', 'footer'), static_files)
 
-    missing = sorted(name for name in static_files if not (static_folder / name).is_file())
+    missing = sorted(name for name in static_files | {FAVICON} if not (static_folder / name).is_file())
     if missing:
         raise SystemExit(f'Missing from the website\'s static folder: {", ".join(missing)}')
 
@@ -192,7 +195,9 @@ def render(website_dir: Path) -> None:
     SHARED_DIR.mkdir(parents=True)
     for name in sorted(static_files):
         shutil.copy2(static_folder / name, SHARED_DIR / name)
-    print(f'Wrote header and footer partials, and copied {len(static_files)} files to {SHARED_DIR}.')
+    shutil.copy2(static_folder / FAVICON, BLOG_ROOT / 'docs' / FAVICON)
+    print(f'Wrote header and footer partials, copied {len(static_files)} files to {SHARED_DIR}, '
+          f'and copied {FAVICON} to {BLOG_ROOT / "docs"}.')
 
 
 if __name__ == '__main__':

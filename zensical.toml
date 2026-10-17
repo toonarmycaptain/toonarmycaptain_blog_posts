@@ -10,7 +10,7 @@ extra_css = ["shared/header_footer.css", "stylesheets/blog.css"]
 
 [project.theme]
 custom_dir = "overrides"
-favicon = "shared/favicon.ico"
+favicon = "favicon.ico"
 language = "en"
 
 # Light or dark to match the device, with a toggle in the nav (added by
