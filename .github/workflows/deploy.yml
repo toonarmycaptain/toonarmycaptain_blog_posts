@@ -12,6 +12,10 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+  # Daily rebuild at 05:00 US Central Standard Time (11:00 UTC). GitHub cron is always UTC and does
+  # not follow daylight saving, so from spring to autumn (CDT) this fires at 06:00 Central.
+  schedule:
+    - cron: "0 11 * * *"
 
 # One deploy at a time. A run started while another is going waits, and replaces any already waiting.
 concurrency:
