@@ -376,7 +376,7 @@ wheels = [
 [[package]]
 name = "toonarmycaptain-blog-posts"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "mdx-breakless-lists" },
     { name = "pillow" },
