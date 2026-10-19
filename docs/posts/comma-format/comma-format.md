@@ -1,6 +1,6 @@
 ---
 title: "Comma format"
-date: 2026-10-21 00:00
+date: 2026-10-22 10:00
 slug: comma-format
 categories: [Python]
 ---
