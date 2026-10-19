@@ -35,6 +35,7 @@ toggle.name = "Switch to system preference"
 [project.plugins.blog]
 blog_dir = "."
 post_url_format = "{slug}"
+draft_if_future_date = true
 
 [project.plugins.tags]
 
