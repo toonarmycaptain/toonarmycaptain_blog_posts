@@ -51,7 +51,7 @@ image = "https://blog.toonarmycaptain.com/shared/feed_image.jpg"
 as_creation = "date"
 as_update = "date"
 
-# Zensical's defaults (setting this table replaces them), plus mdx_breakless_lists.
+# Zensical's defaults (setting this table replaces them), plus mdx_breakless_lists and external_links.
 [project.markdown_extensions]
 abbr = {}
 admonition = {}
@@ -84,3 +84,5 @@ pymdownx.tilde = {}
 # Lets a list start straight after a line of text, as in CommonMark (dev.to, GitHub, PyCharm's
 # preview). Python-Markdown otherwise needs a blank line first.
 mdx_breakless_lists = {}
+# Links to other sites open in a new tab (scripts/external_links.py).
+external_links = {}
