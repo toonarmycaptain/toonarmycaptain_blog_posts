@@ -13,8 +13,8 @@ text with its first letter capitalized; pass --title to set a different display 
 The post starts as a draft (draft: true), so it stays out of the build and the feed until you
 remove that line. The date is prefilled with the current time in UTC, marked with a "# UTC" comment
 since the feed reads bare datetimes as UTC (see zensical.toml's rss date_from_meta). Edit it to when
-you want the post to go out: a future UTC datetime keeps it hidden until then, and the daily rebuild
-(deploy.yml) releases it once that time has passed.
+you want the post to go out: a future UTC datetime keeps it hidden until then, and
+publish_scheduled_posts.yml deploys the blog once that time has passed.
 """
 import argparse
 import re

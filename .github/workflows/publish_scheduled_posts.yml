@@ -1,0 +1,54 @@
+# Deploys the blog at a future-dated post's time, so it goes live then rather than at the next daily
+# rebuild.
+#
+# Only on while a future-dated post is waiting: each deploy on master turns this workflow on or off
+# (deploy.yml's scheduled-posts job), and starts a check straight away when it turns it on.
+#
+# The build leaves future-dated posts out (draft_if_future_date in zensical.toml), so deploying early
+# doesn't help: the deploy has to start after the post's time. Every 15 minutes this looks for posts
+# dated since the last deploy started, or due in the next 30 minutes (scripts/scheduled_posts.py). It
+# waits until the first one's time, then presses deploy.yml's "Run workflow" button. GitHub often
+# starts scheduled runs late, so looking ahead lets a check that started early enough deploy on time.
+#
+# It compares against the last deploy, not the last check, so if GitHub skips or delays checks past
+# a post's time, the next one still deploys it, late.
+name: Publish scheduled posts
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+# A newer check takes over from one that's waiting, so a post isn't deployed once per waiting check.
+concurrency:
+  group: publish-scheduled-posts
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  actions: write  # list deploy.yml's runs, and start one
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.3.0
+
+      - name: Deploy when a post comes due
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # The last deploy that succeeded or hasn't finished. A failed one doesn't count, so it's retried.
+          last_deploy=$(gh run list --workflow deploy.yml --branch master --limit 20 \
+            --json createdAt,status,conclusion \
+            --jq '[.[] | select(.status != "completed" or .conclusion == "success")][0].createdAt')
+          due=$(uv run scripts/scheduled_posts.py due "$last_deploy" --wait 30)
+          if [ -n "$due" ]; then
+            echo "Due since the deploy at $last_deploy:"
+            echo "$due"
+            gh workflow run deploy.yml --ref master
+          else
+            echo "No posts due between the deploy at $last_deploy and 30 minutes from now."
+          fi

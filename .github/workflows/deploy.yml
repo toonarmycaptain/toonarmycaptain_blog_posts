@@ -2,7 +2,9 @@
 #
 # Runs on pushes to master, and from the "Run workflow" button. toonarmycaptain_website's
 # rebuild_blog.yml presses that button through the GitHub API when the website's master changes, so
-# the blog picks up header and footer changes.
+# the blog picks up header and footer changes. This repo's publish_scheduled_posts.yml presses it
+# when a future-dated post's time comes, and the scheduled-posts job below turns that workflow on
+# and off.
 #
 # Runs on master deploy to production. A manual run on another branch makes a preview deploy at
 # <branch>.toonarmycaptain-blog.pages.dev.
@@ -55,3 +57,32 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.151.1"
           command: pages deploy site --project-name=toonarmycaptain-blog --branch=${{ github.ref_name }}
+
+  # Turns publish_scheduled_posts.yml on while a future-dated post is waiting, and off once none are.
+  # Separate from the deploy, so it still runs if the build fails. When it turns the check on, it
+  # also starts one, so a post due in the next few minutes doesn't wait for the next scheduled check.
+  scheduled-posts:
+    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write  # turn publish_scheduled_posts.yml on and off, and start it
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.3.0
+
+      - name: Turn the scheduled posts check on or off
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          upcoming=$(uv run scripts/scheduled_posts.py upcoming)
+          if [ -n "$upcoming" ]; then
+            echo "Future-dated posts, so the check is on:"
+            echo "$upcoming"
+            gh workflow enable publish_scheduled_posts.yml
+            gh workflow run publish_scheduled_posts.yml --ref master
+          else
+            echo "No future-dated posts, so the check is off."
+            gh workflow disable publish_scheduled_posts.yml
+          fi
