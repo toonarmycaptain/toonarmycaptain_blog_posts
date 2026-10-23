@@ -84,5 +84,9 @@ jobs:
             gh workflow run publish_scheduled_posts.yml --ref master
           else
             echo "No future-dated posts, so the check is off."
-            gh workflow disable publish_scheduled_posts.yml
+            # GitHub refuses to disable a workflow that's already off, so only disable it if it's on.
+            state=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/publish_scheduled_posts.yml" --jq .state)
+            if [ "$state" = active ]; then
+              gh workflow disable publish_scheduled_posts.yml
+            fi
           fi
